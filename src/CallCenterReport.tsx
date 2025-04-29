@@ -73,7 +73,7 @@ export default function CallCenterReport() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center items-start">
-      <div className="relative p-6 font-sans max-w-5xl w-full bg-white shadow-lg rounded-lg px-6 md:px-12">
+      <div className="relative p-6 font-sans w-full max-w-screen-lg bg-white shadow-lg rounded-lg px-6 md:px-12 mx-auto">
         <div className="fixed top-4 right-6 z-50 print:hidden">
   <button
     onClick={() => window.print()}
