@@ -12,6 +12,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+// --- Data Model and Source ---
 type WeekData = {
   inbound: number;
   answered: number;
@@ -30,53 +31,90 @@ const data: Record<string, WeekData> = {
 const colors = ['#4CAF50', '#F44336', '#FF9800'];
 
 export default function CallCenterReport() {
-  const [selectedWeek, setSelectedWeek] = React.useState<string>("04/07-04/11");
-  const currentData = data[selectedWeek];
+  const [selectedWeek, setSelectedWeek] = React.useState<string | 'All'>('All');
+
+  const allWeeks = Object.keys(data);
+  const combinedData = allWeeks.reduce(
+    (totals, week) => {
+      const w = data[week];
+      return {
+        inbound: totals.inbound + w.inbound,
+        answered: totals.answered + w.answered,
+        abandoned: totals.abandoned + w.abandoned,
+        missed: totals.missed + w.missed,
+        avgHandleTime: totals.avgHandleTime + w.avgHandleTime,
+        staffNeeded: totals.staffNeeded + w.staffNeeded
+      };
+    },
+    { inbound: 0, answered: 0, abandoned: 0, missed: 0, avgHandleTime: 0, staffNeeded: 0 }
+  );
+
+  const weekKeys = selectedWeek === 'All' ? allWeeks : [selectedWeek];
+  const aggregatedData = weekKeys.map(week => data[week]);
+
+  const total = aggregatedData.reduce(
+    (acc, cur) => {
+      return {
+        inbound: acc.inbound + cur.inbound,
+        answered: acc.answered + cur.answered,
+        abandoned: acc.abandoned + cur.abandoned,
+        missed: acc.missed + cur.missed,
+        avgHandleTime: acc.avgHandleTime + cur.avgHandleTime,
+        staffNeeded: acc.staffNeeded + cur.staffNeeded
+      };
+    },
+    { inbound: 0, answered: 0, abandoned: 0, missed: 0, avgHandleTime: 0, staffNeeded: 0 }
+  );
 
   const pieData = [
-    { name: 'Answered', value: currentData.answered },
-    { name: 'Abandoned', value: currentData.abandoned },
-    { name: 'Missed', value: currentData.missed }
+    { name: 'Answered', value: total.answered },
+    { name: 'Abandoned', value: total.abandoned },
+    { name: 'Missed', value: total.missed }
   ];
 
   const barData = [
-    { name: 'Inbound Calls', value: currentData.inbound },
-    { name: 'Answered Calls', value: currentData.answered },
-    { name: 'Abandoned Calls', value: currentData.abandoned },
-    { name: 'Missed Calls', value: currentData.missed }
+    { name: 'Inbound Calls', value: total.inbound },
+    { name: 'Answered Calls', value: total.answered },
+    { name: 'Abandoned Calls', value: total.abandoned },
+    { name: 'Missed Calls', value: total.missed }
   ];
 
+  const avgHandleTime = (total.avgHandleTime / aggregatedData.length).toFixed(2);
+
   return (
-    <div className="p-6 font-sans max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold mb-2 text-center">📞 Call Center Performance Report</h1>
+    <div className="p-6 font-sans max-w-4xl mx-auto bg-white shadow rounded-md">
+      <h1 className="text-3xl font-bold mb-2 text-center">Call Center Performance Analysis</h1>
       <p className="text-md text-center mb-6 text-gray-600">
-        Data-driven insights across 3 recent weeks to assess operator capacity, call routing issues, and performance efficiency.
+        Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
       </p>
 
-      <div className="mb-8 bg-white p-6 rounded shadow-md">
-        <h2 className="text-xl font-semibold mb-2">📝 Executive Summary</h2>
-        <p className="text-gray-700 mb-2">
-          This report evaluates inbound call trends, operator performance, and abandonment issues. Over the three-week span, call volumes slightly decreased, yet the percentage of answered calls also dropped. Missed and abandoned calls suggest the current staffing model may be insufficient and IVR menus may be frustrating users.
-        </p>
-        <p className="text-gray-700">
-          Based on handle time and call volume, we recommend <strong>3 dedicated operators</strong> to ensure optimal response times and improved customer experience.
-        </p>
-      </div>
-
       <div className="mb-6 text-center">
-        {Object.keys(data).map((week) => (
+        <button
+          onClick={() => setSelectedWeek('All')}
+          className={`mx-2 px-4 py-2 rounded ${selectedWeek === 'All' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+        >All Weeks</button>
+        {allWeeks.map(week => (
           <button
             key={week}
             onClick={() => setSelectedWeek(week)}
-            className={`mx-2 px-4 py-2 rounded ${selectedWeek === week ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
-            {week}
-          </button>
+            className={`mx-2 px-4 py-2 rounded ${selectedWeek === week ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+          >{week}</button>
         ))}
       </div>
 
+      <section className="bg-gray-50 p-4 rounded mb-6">
+        <h2 className="text-xl font-semibold mb-2">Executive Summary</h2>
+        <p className="mb-2 text-gray-700">
+          Over the reviewed period, the call center experienced a consistent call volume of over 1,000 inbound calls per week. However, a significant number of these calls were missed or abandoned — often due to insufficient staffing and possibly ineffective IVR design. While the average handle time remained stable (~4 minutes), the abandonment and missed call rates suggest that the system could not efficiently handle the volume.
+        </p>
+        <p className="text-gray-700">
+          We strongly recommend transitioning from 2 to <span className="text-red-600 font-bold">3 full-time dedicated operators</span> to reduce missed opportunities, improve service response, and lower abandonment rates.
+        </p>
+      </section>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white p-4 rounded shadow-md">
-          <h3 className="text-lg font-semibold mb-2 text-center">📊 Weekly Call Distribution</h3>
+          <h3 className="text-lg font-semibold mb-2 text-center">Call Volume Breakdown</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={barData}>
               <XAxis dataKey="name" />
@@ -88,7 +126,7 @@ export default function CallCenterReport() {
         </div>
 
         <div className="bg-white p-4 rounded shadow-md">
-          <h3 className="text-lg font-semibold mb-2 text-center">📈 Call Outcome Breakdown</h3>
+          <h3 className="text-lg font-semibold mb-2 text-center">Call Disposition Summary</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -111,19 +149,16 @@ export default function CallCenterReport() {
         </div>
       </div>
 
-      <div className="mt-8 bg-white p-6 rounded shadow-md">
-        <h2 className="text-xl font-semibold mb-2">🔍 Interpretation & Recommendation</h2>
-        <p className="text-gray-700 mb-2">
-          The <strong>average handle time</strong> across all weeks hovered around 4 minutes. When calculated against total inbound volume,
-          this suggests that 2 staff are insufficient to manage peak volume, especially during high-abandonment periods.
-        </p>
-        <p className="text-gray-700 mb-2">
-          Many calls are missed or abandoned, likely due to a long wait time or confusing IVR menu. We recommend reviewing IVR scripts and simplifying call paths to reduce friction.
-        </p>
-        <p className="text-gray-700">
-          For immediate operational improvement, staff should increase from 2 → <strong className="text-red-600">3 dedicated operators</strong> to match workload and reduce missed opportunities.
-        </p>
-      </div>
+      <section className="mt-8 bg-gray-50 p-6 rounded shadow">
+        <h2 className="text-xl font-semibold mb-2">Interpretation & Operational Recommendations</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-2">
+          <li><strong>Inbound Load:</strong> Weekly inbound calls exceed 1,000. Without corresponding staffing, response times suffer.</li>
+          <li><strong>Missed/Abandoned Rates:</strong> Nearly 40–45% of calls are not answered live. This creates friction and hurts patient experience.</li>
+          <li><strong>Staffing Need:</strong> Based on call load and 4-minute average handle time, 3 operators are required to prevent overflow queues.</li>
+          <li><strong>IVR System:</strong> High abandonment could indicate caller frustration or confusion with menu options. Consider simplifying prompts.</li>
+          <li><strong>Recommendation:</strong> Add one more full-time operator, improve IVR clarity, and consider tracking hourly call volume for better scheduling.</li>
+        </ul>
+      </section>
     </div>
   );
 }
