@@ -73,7 +73,7 @@ export default function CallCenterReport() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center">
-      <div className="p-6 font-sans max-w-3xl w-full bg-white shadow-lg rounded-lg">
+      <div className="p-6 font-sans max-w-3xl w-full bg-white shadow-lg rounded-lg px-6 md:px-12">
         <div className="flex justify-end mb-4">
           <button
             onClick={() => window.print()}
@@ -87,7 +87,7 @@ export default function CallCenterReport() {
           Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
         </p>
 
-        {/* Additional report content restored below */}
+        <!-- Additional report content restored below -->
 <section className="bg-white p-4 rounded mb-6">
   <h2 className="text-xl font-semibold mb-2">Executive Summary</h2>
   <p className="mb-2 text-gray-700">
@@ -180,12 +180,12 @@ export default function CallCenterReport() {
 </section>
 
 <section className="mt-10 bg-white p-6 rounded shadow">
-  <h2 className="text-xl font-semibold mb-4">Weekly Performance Table</h2>
+  <h2 className="text-xl font-semibold mb-4">Detailed Weekly Performance</h2>
   <div className="overflow-x-auto">
-    <table className="table-auto w-full border text-sm text-left">
+    <table className="min-w-full table-auto border text-sm text-left divide-y divide-gray-300">
       <thead>
         <tr className="bg-gray-200">
-          <th className="px-4 py-2">Week</th>
+          <th className="px-6 py-3 whitespace-nowrap">Week</th>
           <th className="px-4 py-2">Inbound</th>
           <th className="px-4 py-2">Answered</th>
           <th className="px-4 py-2">Abandoned</th>
