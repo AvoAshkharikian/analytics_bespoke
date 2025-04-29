@@ -87,8 +87,147 @@ export default function CallCenterReport() {
           Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
         </p>
 
-        {/* Rest of the report content remains unchanged */}
+        <!-- Additional report content restored below -->
+<section className="bg-white p-4 rounded mb-6">
+  <h2 className="text-xl font-semibold mb-2">Executive Summary</h2>
+  <p className="mb-2 text-gray-700">
+    During the analysis period, over {total.inbound} inbound calls were received. Approximately {total.answered} were successfully answered, while {total.abandoned} calls were abandoned and {total.missed} were missed. Average handle time held steady at {avgHandleTime} minutes.
+  </p>
+  <p className="text-gray-700">
+    To manage the current call load efficiently, agents would need to collectively handle {totalMinutesNeeded.toFixed(0)} minutes of talk time. Based on weekday call averages and agent availability, we recommend a minimum of <span className="text-red-600 font-bold">{requiredAgents} full-time dedicated operators</span>. This accounts for overlapping call volume and prevents system bottlenecks.
+  </p>
+</section>
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div className="bg-white p-4 rounded shadow-md">
+    <div className="flex justify-between items-center mb-2">
+      <h3 className="text-lg font-semibold">Call Volume Breakdown</h3>
+      <div>
+        <button
+          onClick={() => setSelectedWeek('All')}
+          className={`mx-1 px-3 py-1 rounded ${selectedWeek === 'All' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+        >All</button>
+        {allWeeks.map(week => (
+          <button
+            key={week}
+            onClick={() => setSelectedWeek(week)}
+            className={`mx-1 px-3 py-1 rounded ${selectedWeek === week ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+          >{week}</button>
+        ))}
       </div>
     </div>
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={barData}>
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Bar dataKey="value" fill="#8884d8" />
+      </BarChart>
+    </ResponsiveContainer>
+    <p className="mt-4 text-gray-700 text-sm">
+      This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls. A high proportion of missed or abandoned calls indicates potential understaffing and inefficiencies in live response routing.
+    </p>
+  </div>
+
+  <div className="bg-white p-4 rounded shadow-md">
+    <h3 className="text-lg font-semibold mb-2 text-center">Call Disposition Summary</h3>
+    <ResponsiveContainer width="100%" height={300}>
+      <PieChart>
+        <Pie
+          data={pieData}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          outerRadius={80}
+          fill="#8884d8"
+          label
+        >
+          {pieData.map((_, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index]} />
+          ))}
+        </Pie>
+        <Legend />
+      </PieChart>
+    </ResponsiveContainer>
+    <p className="mt-4 text-gray-700 text-sm">
+      This pie chart visually summarizes the distribution of answered, abandoned, and missed calls. The high abandonment rate may point to long IVR navigation or insufficient staffing during peak hours.
+    </p>
+  </div>
+</div>
+
+<section className="mt-10 bg-white p-6 rounded shadow">
+  <h2 className="text-xl font-semibold mb-4">Weekly Trends (Line Chart)</h2>
+  <p className="text-gray-700 text-sm mb-4">
+    This chart illustrates the trends in call volume and outcomes across each week, helping identify whether improvements are being made over time.
+  </p>
+  <ResponsiveContainer width="100%" height={300}>
+    <LineChart data={allWeeks.map(week => ({
+      week,
+      answered: data[week].answered,
+      abandoned: data[week].abandoned,
+      missed: data[week].missed
+    }))}>
+      <XAxis dataKey="week" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line type="monotone" dataKey="answered" stroke="#4CAF50" name="Answered Calls" />
+      <Line type="monotone" dataKey="abandoned" stroke="#F44336" name="Abandoned Calls" />
+      <Line type="monotone" dataKey="missed" stroke="#FF9800" name="Missed Calls" />
+    </LineChart>
+  </ResponsiveContainer>
+</section>
+
+<section className="mt-10 bg-white p-6 rounded shadow">
+  <h2 className="text-xl font-semibold mb-4">Weekly Performance Table</h2>
+  <div className="overflow-x-auto">
+    <table className="table-auto w-full border text-sm text-left">
+      <thead>
+        <tr className="bg-gray-200">
+          <th className="px-4 py-2">Week</th>
+          <th className="px-4 py-2">Inbound</th>
+          <th className="px-4 py-2">Answered</th>
+          <th className="px-4 py-2">Abandoned</th>
+          <th className="px-4 py-2">Missed</th>
+          <th className="px-4 py-2">Avg Handle Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Object.entries(data).map(([week, values]) => (
+          <tr key={week} className="border-b">
+            <td className="px-4 py-2 font-medium">{week}</td>
+            <td className="px-4 py-2">{values.inbound}</td>
+            <td className="px-4 py-2">{values.answered}</td>
+            <td className="px-4 py-2">{values.abandoned}</td>
+            <td className="px-4 py-2">{values.missed}</td>
+            <td className="px-4 py-2">{values.avgHandleTime.toFixed(2)} min</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section className="mt-10 bg-white p-6 rounded shadow">
+  <h2 className="text-xl font-semibold mb-4">Strategic Action Plan</h2>
+  <ul className="list-disc list-inside text-gray-700 space-y-1">
+    <li>Enable hourly call tracking on the phone system.</li>
+    <li>Deploy smart scheduling software based on hourly call trends.</li>
+    <li>Establish agent performance KPIs (answer rate, average speed of answer).</li>
+    <li>Conduct IVR usability testing with real patients.</li>
+    <li>Schedule weekly reviews of abandonment and wait time trends.</li>
+  </ul>
+</section>
+
+<section className="mt-10 bg-white p-6 rounded shadow">
+  <h2 className="text-xl font-semibold mb-4">Summary of Key Insights</h2>
+  <p className="text-gray-700 text-sm">
+    This report provides an overview of performance gaps in your call center process. Staffing and IVR performance are contributing to high abandonment. Use this data to prioritize staffing, scheduling, and system changes, and set a 30-60-90 day performance improvement plan for measurable impact.
+  </p>
+</section>
+
+</div>
+</div>
   );
 }
