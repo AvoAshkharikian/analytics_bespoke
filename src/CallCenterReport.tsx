@@ -72,7 +72,7 @@ export default function CallCenterReport() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
-      <div className="p-6 font-sans max-w-5xl mx-auto bg-white shadow-lg rounded-lg">
+      <div className="p-6 font-sans max-w-3xl mx-auto bg-white shadow-lg rounded-lg">
         <h1 className="text-3xl font-bold mb-2 text-center">Call Center Performance Analysis</h1>
         <p className="text-md text-center mb-6 text-gray-600">
           Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
