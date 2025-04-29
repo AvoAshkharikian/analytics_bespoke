@@ -74,13 +74,13 @@ export default function CallCenterReport() {
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center">
       <div className="relative p-6 font-sans max-w-3xl w-full bg-white shadow-lg rounded-lg px-6 md:px-12">
-        <div className="absolute top-6 right-8 z-10">
+        <div className="absolute top-4 right-6 z-20">
   <button
     onClick={() => window.print()}
-    className="flex items-center gap-2 bg-blue-700 text-white px-5 py-2 rounded shadow-md hover:bg-blue-800 transition"
+    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-1.5 rounded-full shadow-md hover:bg-blue-700 transition text-sm"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12.75h10.5m-10.5 3h10.5M6 3.75h12c.414 0 .75.336.75.75v4.5a.75.75 0 01-.75.75H6a.75.75 0 01-.75-.75v-4.5c0-.414.336-.75.75-.75zm1.5 0v2.25h9V3.75H7.5z" />
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
+      <path d="M19 9h-1V3H6v6H5a2 2 0 00-2 2v7h4v3h10v-3h4v-7a2 2 0 00-2-2zM8 5h8v4H8V5zm8 14H8v-4h8v4zm4-5h-3v-2H7v2H4v-3a1 1 0 011-1h14a1 1 0 011 1v3z" />
     </svg>
     Download PDF
   </button>
@@ -90,7 +90,7 @@ export default function CallCenterReport() {
           Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
         </p>
 
-        {/* Additional report content restored below */}
+        <!-- Additional report content restored below -->
 <section className="bg-white p-4 rounded mb-6">
   <h2 className="text-xl font-semibold mb-2">Executive Summary</h2>
   <p className="mb-2 text-gray-700">
