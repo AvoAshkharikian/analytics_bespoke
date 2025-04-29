@@ -74,13 +74,13 @@ export default function CallCenterReport() {
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center">
       <div className="relative p-6 font-sans max-w-3xl w-full bg-white shadow-lg rounded-lg px-6 md:px-12">
-        <div className="absolute top-4 right-6 z-20">
+        <div className="flex justify-end w-full mb-2">
   <button
     onClick={() => window.print()}
     className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded-full shadow hover:bg-blue-700 transition text-xs"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
-      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v2h10V3a1 1 0 00-1-1H6zm9 4H5a1 1 0 00-1 1v6h3v3h6v-3h3V7a1 1 0 00-1-1zm-2 6v2H7v-2h6z" clipRule="evenodd" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+      <path d="M5 4a2 2 0 012-2h10a2 2 0 012 2v4H5V4zm14 6H5v8h4v2h6v-2h4v-8z" />
     </svg>
     PDF
   </button>
