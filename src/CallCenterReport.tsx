@@ -77,12 +77,12 @@ export default function CallCenterReport() {
         <div className="absolute top-4 right-6 z-20">
   <button
     onClick={() => window.print()}
-    className="flex items-center gap-2 bg-blue-600 text-white px-4 py-1.5 rounded-full shadow-md hover:bg-blue-700 transition text-sm"
+    className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded-full shadow hover:bg-blue-700 transition text-xs"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
-      <path d="M19 9h-1V3H6v6H5a2 2 0 00-2 2v7h4v3h10v-3h4v-7a2 2 0 00-2-2zM8 5h8v4H8V5zm8 14H8v-4h8v4zm4-5h-3v-2H7v2H4v-3a1 1 0 011-1h14a1 1 0 011 1v3z" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
+      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v2h10V3a1 1 0 00-1-1H6zm9 4H5a1 1 0 00-1 1v6h3v3h6v-3h3V7a1 1 0 00-1-1zm-2 6v2H7v-2h6z" clipRule="evenodd" />
     </svg>
-    Download PDF
+    PDF
   </button>
 </div>
         <h1 className="text-3xl font-bold mb-2 text-center">Call Center Performance Analysis</h1>
@@ -90,7 +90,7 @@ export default function CallCenterReport() {
           Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
         </p>
 
-        {/* Additional report content restored below */}
+        <!-- Additional report content restored below -->
 <section className="bg-white p-4 rounded mb-6">
   <h2 className="text-xl font-semibold mb-2">Executive Summary</h2>
   <p className="mb-2 text-gray-700">
