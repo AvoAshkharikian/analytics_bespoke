@@ -83,7 +83,7 @@ export default function CallCenterReport() {
               fill="#8884d8"
               label
             >
-              {pieData.map((entry, index) => (
+              {pieData.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={colors[index]} />
               ))}
             </Pie>
