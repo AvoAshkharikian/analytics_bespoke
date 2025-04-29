@@ -1,3 +1,4 @@
+import React from 'react';
 import CallCenterReport from './CallCenterReport';
 
 function App() {
