@@ -69,10 +69,10 @@ export default function CallCenterReport() {
   const requiredAgents = Math.ceil((callsPerDay * parseFloat(avgHandleTime)) / availableMinutesPerAgent);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 flex justify-center items-start">
+    <div className="min-h-screen bg-gray-100 py-12 px-4 flex justify-center">
       <div className="relative w-full max-w-screen-lg bg-white shadow-lg rounded-lg px-6 md:px-12 py-10">
 
-        {/* ✅ PDF Download Button - Correct Placement */}
+        {/* ✅ PDF Download Button - top-right INSIDE card */}
         <div className="absolute top-4 right-4 print:hidden">
           <button
             onClick={() => window.print()}
