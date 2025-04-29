@@ -72,8 +72,8 @@ export default function CallCenterReport() {
   const requiredAgents = Math.ceil((callsPerDay * parseFloat(avgHandleTime)) / availableMinutesPerAgent);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4 relative">
-      <div className="mx-auto p-6 font-sans max-w-3xl w-full bg-white shadow-lg rounded-lg px-6 md:px-12 relative">
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <div className="relative p-6 font-sans w-[70%] mx-auto bg-white shadow-lg rounded-lg px-6 md:px-12">
         <div className="absolute top-4 right-6 z-20">
   <button
     onClick={() => window.print()}
