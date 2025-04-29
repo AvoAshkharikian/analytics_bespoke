@@ -74,7 +74,7 @@ export default function CallCenterReport() {
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center">
       <div className="relative p-6 font-sans max-w-3xl w-full bg-white shadow-lg rounded-lg px-6 md:px-12">
-        <div className="flex justify-end w-full mb-2">
+        <div className="absolute top-4 right-6 z-20">
   <button
     onClick={() => window.print()}
     className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded-full shadow hover:bg-blue-700 transition text-xs"
