@@ -73,6 +73,14 @@ export default function CallCenterReport() {
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
       <div className="p-6 font-sans max-w-3xl mx-auto bg-white shadow-lg rounded-lg">
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={() => window.print()}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+          >
+            Download PDF
+          </button>
+        </div>
         <h1 className="text-3xl font-bold mb-2 text-center">Call Center Performance Analysis</h1>
         <p className="text-md text-center mb-6 text-gray-600">
           Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
@@ -156,6 +164,85 @@ export default function CallCenterReport() {
             <li><strong>Next Steps:</strong> Increase agent count, enhance IVR logic, and consider implementing call-backs or auto-routing based on department needs.</li>
           </ul>
         </section>
+
+        <section className="mt-10 bg-white p-6 rounded shadow">
+          <h2 className="text-xl font-semibold mb-4">Hourly Call Volume Analysis</h2>
+          <p className="text-gray-700 text-sm mb-4">
+            While call volume was analyzed on a weekly basis, hour-by-hour breakdowns (not included in this sample data) are critical to identifying congestion windows. We recommend implementing hourly call tracking to pinpoint peak call periods, allowing for smart staff scheduling.
+          </p>
+        </section>
+
+        <section className="mt-10 bg-white p-6 rounded shadow">
+          <h2 className="text-xl font-semibold mb-4">Weekly Performance Table</h2>
+          <div className="overflow-x-auto">
+            <table className="table-auto w-full border text-sm text-left">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="px-4 py-2">Week</th>
+                  <th className="px-4 py-2">Inbound</th>
+                  <th className="px-4 py-2">Answered</th>
+                  <th className="px-4 py-2">Abandoned</th>
+                  <th className="px-4 py-2">Missed</th>
+                  <th className="px-4 py-2">Avg Handle Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(data).map(([week, values]) => (
+                  <tr key={week} className="border-b">
+                    <td className="px-4 py-2 font-medium">{week}</td>
+                    <td className="px-4 py-2">{values.inbound}</td>
+                    <td className="px-4 py-2">{values.answered}</td>
+                    <td className="px-4 py-2">{values.abandoned}</td>
+                    <td className="px-4 py-2">{values.missed}</td>
+                    <td className="px-4 py-2">{values.avgHandleTime.toFixed(2)} min</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="mt-10 bg-white p-6 rounded shadow">
+          <h2 className="text-xl font-semibold mb-4">Strategic Action Plan</h2>
+          <ul className="list-disc list-inside text-gray-700 space-y-1">
+            <li>Enable hourly call tracking on the phone system.</li>
+            <li>Deploy smart scheduling software based on hourly call trends.</li>
+            <li>Establish agent performance KPIs (answer rate, average speed of answer).</li>
+            <li>Conduct IVR usability testing with real patients.</li>
+            <li>Schedule weekly reviews of abandonment and wait time trends.</li>
+          </ul>
+        </section>
+
+        <section className="mt-10 bg-white p-6 rounded shadow">
+          <h2 className="text-xl font-semibold mb-4">Summary of Key Insights</h2>
+          <p className="text-gray-700 text-sm">
+            This report provides an overview of performance gaps in your call center process. Staffing and IVR performance are contributing to high abandonment. Use this data to prioritize staffing, scheduling, and system changes, and set a 30-60-90 day performance improvement plan for measurable impact.
+          </p>
+        </section>
+
+        <section className="mt-10 bg-white p-6 rounded shadow">
+          <h2 className="text-xl font-semibold mb-4">Weekly Trends (Line Chart)</h2>
+          <p className="text-gray-700 text-sm mb-4">
+            This chart illustrates the trends in call volume and outcomes across each week, helping identify whether improvements are being made over time.
+          </p>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={allWeeks.map(week => ({
+              week,
+              answered: data[week].answered,
+              abandoned: data[week].abandoned,
+              missed: data[week].missed
+            }))}>
+              <XAxis dataKey="week" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="answered" stroke="#4CAF50" name="Answered Calls" />
+              <Line type="monotone" dataKey="abandoned" stroke="#F44336" name="Abandoned Calls" />
+              <Line type="monotone" dataKey="missed" stroke="#FF9800" name="Missed Calls" />
+            </LineChart>
+          </ResponsiveContainer>
+        </section>
+
       </div>
     </div>
   );
