@@ -90,7 +90,7 @@ export default function CallCenterReport() {
           Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
         </p>
 
-        <!-- Additional report content restored below -->
+        {/* Additional report content restored below */}
 <section className="bg-white p-4 rounded mb-6">
   <h2 className="text-xl font-semibold mb-2">Executive Summary</h2>
   <p className="mb-2 text-gray-700">
