@@ -70,10 +70,10 @@ export default function CallCenterReport() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 flex justify-center items-start">
-      <div className="relative w-full max-w-screen-lg bg-white shadow-lg rounded-lg px-6 md:px-12 py-8">
+      <div className="relative w-full max-w-screen-lg bg-white shadow-lg rounded-lg px-6 md:px-12 py-10">
 
-        {/* PDF Button - Top Right in Card */}
-        <div className="absolute top-6 right-6 z-10 print:hidden">
+        {/* ✅ PDF Download Button - Correct Placement */}
+        <div className="absolute top-4 right-4 print:hidden">
           <button
             onClick={() => window.print()}
             className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded-full shadow hover:bg-blue-700 transition text-xs"
