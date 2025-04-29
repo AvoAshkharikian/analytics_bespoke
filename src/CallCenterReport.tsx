@@ -34,21 +34,6 @@ export default function CallCenterReport() {
   const [selectedWeek, setSelectedWeek] = React.useState<string | 'All'>('All');
 
   const allWeeks = Object.keys(data);
-  const combinedData = allWeeks.reduce(
-    (totals, week) => {
-      const w = data[week];
-      return {
-        inbound: totals.inbound + w.inbound,
-        answered: totals.answered + w.answered,
-        abandoned: totals.abandoned + w.abandoned,
-        missed: totals.missed + w.missed,
-        avgHandleTime: totals.avgHandleTime + w.avgHandleTime,
-        staffNeeded: totals.staffNeeded + w.staffNeeded
-      };
-    },
-    { inbound: 0, answered: 0, abandoned: 0, missed: 0, avgHandleTime: 0, staffNeeded: 0 }
-  );
-
   const weekKeys = selectedWeek === 'All' ? allWeeks : [selectedWeek];
   const aggregatedData = weekKeys.map(week => data[week]);
 
@@ -79,7 +64,7 @@ export default function CallCenterReport() {
     { name: 'Missed Calls', value: total.missed }
   ];
 
-  const avgHandleTime = (total.avgHandleTime / aggregatedData.length).toFixed(2);
+  const avgHandleTime = aggregatedData.length > 0 ? (total.avgHandleTime / aggregatedData.length).toFixed(2) : '0.00';
 
   return (
     <div className="p-6 font-sans max-w-4xl mx-auto bg-white shadow rounded-md">
