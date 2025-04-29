@@ -1,6 +1,15 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend, ResponsiveContainer
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+  ResponsiveContainer
 } from 'recharts';
 
 type WeekData = {
@@ -21,7 +30,7 @@ const data: Record<string, WeekData> = {
 const colors = ['#4CAF50', '#F44336', '#FF9800'];
 
 export default function CallCenterReport() {
-  const [selectedWeek, setSelectedWeek] = useState<string>("04/07-04/11");
+  const [selectedWeek, setSelectedWeek] = React.useState<string>("04/07-04/11");
 
   const currentData = data[selectedWeek];
   const pieData = [
@@ -40,6 +49,7 @@ export default function CallCenterReport() {
   return (
     <div className="p-4 font-sans">
       <h1 className="text-2xl font-bold text-center mb-6">Call Center Weekly Analytics Report</h1>
+
       <div className="text-center mb-4">
         {Object.keys(data).map((week) => (
           <button
