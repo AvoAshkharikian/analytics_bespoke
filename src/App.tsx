@@ -1,4 +1,3 @@
-import * as React from 'react';
 import CallCenterReport from './CallCenterReport';
 
 function App() {
