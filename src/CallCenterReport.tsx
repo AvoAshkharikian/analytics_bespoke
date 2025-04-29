@@ -65,6 +65,9 @@ export default function CallCenterReport() {
   ];
 
   const avgHandleTime = aggregatedData.length > 0 ? (total.avgHandleTime / aggregatedData.length).toFixed(2) : '0.00';
+  const availableMinutesPerAgent = 420;
+  const totalMinutesNeeded = total.answered * parseFloat(avgHandleTime);
+  const requiredAgents = Math.ceil(totalMinutesNeeded / availableMinutesPerAgent);
 
   return (
     <div className="p-6 font-sans max-w-4xl mx-auto bg-white shadow rounded-md">
@@ -90,10 +93,10 @@ export default function CallCenterReport() {
       <section className="bg-gray-50 p-4 rounded mb-6">
         <h2 className="text-xl font-semibold mb-2">Executive Summary</h2>
         <p className="mb-2 text-gray-700">
-          Over the reviewed period, the call center experienced a consistent call volume of over 1,000 inbound calls per week. However, a significant number of these calls were missed or abandoned — often due to insufficient staffing and possibly ineffective IVR design. While the average handle time remained stable (~4 minutes), the abandonment and missed call rates suggest that the system could not efficiently handle the volume.
+          During the analysis period, over {total.inbound} inbound calls were received. Approximately {total.answered} were successfully answered, while {total.abandoned} calls were abandoned and {total.missed} were missed. Average handle time held steady at {avgHandleTime} minutes.
         </p>
         <p className="text-gray-700">
-          We strongly recommend transitioning from 2 to <span className="text-red-600 font-bold">3 full-time dedicated operators</span> to reduce missed opportunities, improve service response, and lower abandonment rates.
+          To manage the current call load efficiently, agents would need to collectively handle {totalMinutesNeeded.toFixed(0)} minutes of talk time. With each agent only able to handle about 420 minutes per day, this translates to a minimum of <span className="text-red-600 font-bold">{requiredAgents} full-time dedicated operators</span>. Three agents are recommended to account for call concurrency and prevent overflow during peak periods.
         </p>
       </section>
 
@@ -139,9 +142,9 @@ export default function CallCenterReport() {
         <ul className="list-disc list-inside text-gray-700 space-y-2">
           <li><strong>Inbound Load:</strong> Weekly inbound calls exceed 1,000. Without corresponding staffing, response times suffer.</li>
           <li><strong>Missed/Abandoned Rates:</strong> Nearly 40–45% of calls are not answered live. This creates friction and hurts patient experience.</li>
-          <li><strong>Staffing Need:</strong> Based on call load and 4-minute average handle time, 3 operators are required to prevent overflow queues.</li>
-          <li><strong>IVR System:</strong> High abandonment could indicate caller frustration or confusion with menu options. Consider simplifying prompts.</li>
-          <li><strong>Recommendation:</strong> Add one more full-time operator, improve IVR clarity, and consider tracking hourly call volume for better scheduling.</li>
+          <li><strong>Staffing Need:</strong> With an average handle time of {avgHandleTime} minutes and available time of 420 minutes per agent, at least {requiredAgents} agents are needed. Three are recommended to handle concurrent calls.</li>
+          <li><strong>IVR System:</strong> High abandonment could indicate caller frustration or confusion with menu options. Consider simplifying prompts and reducing wait time.</li>
+          <li><strong>Next Steps:</strong> Increase agent count, enhance IVR logic, and consider implementing call-backs or auto-routing based on department needs.</li>
         </ul>
       </section>
     </div>
