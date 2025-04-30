@@ -86,16 +86,16 @@ export default function CallCenterReport() {
         </div>
 
         <h1 className="text-3xl font-bold mb-4 text-center">Call Center Performance Analysis</h1>
-        <p className="text-md text-center mb-8 text-gray-600">
+        <p className="text-md text-center mb-8 text-white-600">
           Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
         </p>
 
         <section className="bg-gray-700 p-6 rounded mb-8 shadow-sm">
           <h2 className="text-xl font-semibold mb-3">Executive Summary</h2>
-          <p className="mb-3 text-gray-300">
+          <p className="mb-3 text-white-300">
             During the analysis period, over {total.inbound} inbound calls were received. Approximately {total.answered} were successfully answered, while {total.abandoned} calls were abandoned and {total.missed} were missed. Average handle time held steady at {avgHandleTime} minutes.
           </p>
-          <p className="text-gray-300">
+          <p className="text-white-300">
             To manage the current call load efficiently, agents would need to collectively handle {totalMinutesNeeded.toFixed(0)} minutes of talk time. Based on weekday call averages and agent availability, we recommend a minimum of <span className="text-red-600 font-bold">{requiredAgents} full-time dedicated operators</span>.
           </p>
         </section>
@@ -126,7 +126,7 @@ export default function CallCenterReport() {
                 <Bar dataKey="value" fill="#8884d8" />
               </BarChart>
             </ResponsiveContainer>
-            <p className="mt-4 text-gray-300 text-sm">
+            <p className="mt-4 text-white-300 text-sm">
               This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
             </p>
           </div>
@@ -152,7 +152,7 @@ export default function CallCenterReport() {
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
-            <p className="mt-4 text-gray-300 text-sm">
+            <p className="mt-4 text-white-300 text-sm">
               This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
             </p>
           </div>
@@ -210,7 +210,7 @@ export default function CallCenterReport() {
 
         <section className="bg-gray-700 p-6 rounded shadow-sm mb-10">
           <h2 className="text-xl font-semibold mb-4">Strategic Action Plan</h2>
-          <ul className="list-disc list-inside text-gray-300 space-y-1">
+          <ul className="list-disc list-inside text-white-300 space-y-1">
             <li>Enable hourly call tracking on the phone system.</li>
             <li>Deploy smart scheduling software based on hourly call trends.</li>
             <li>Establish agent performance KPIs (answer rate, average speed of answer).</li>
@@ -221,7 +221,7 @@ export default function CallCenterReport() {
 
         <section className="bg-gray-700 p-6 rounded shadow-sm">
           <h2 className="text-xl font-semibold mb-4">Summary of Key Insights</h2>
-          <p className="text-gray-300 text-sm">
+          <p className="text-white-300 text-sm">
             This report provides an overview of performance gaps in your call center process. Staffing and IVR performance are contributing to high abandonment. Use this data to prioritize staffing, scheduling, and system changes, and set a 30-60-90 day performance improvement plan for measurable impact.
           </p>
         </section>
