@@ -221,7 +221,7 @@ export default function CallCenterReport() {
 
         <section className="bg-white p-6 rounded shadow-sm">
           <h2 className="text-xl font-semibold mb-4">Summary of Key Insights</h2>
-          <p className="text-gray-700 text-sm">
+          <p className="text-gray-300 text-sm">
             This report provides an overview of performance gaps in your call center process. Staffing and IVR performance are contributing to high abandonment. Use this data to prioritize staffing, scheduling, and system changes, and set a 30-60-90 day performance improvement plan for measurable impact.
           </p>
         </section>
