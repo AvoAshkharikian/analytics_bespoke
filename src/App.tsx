@@ -1,10 +1,12 @@
+import React from 'react';
 import CallCenterReport from './CallCenterReport';
+import Layout from './Layout';
 
 function App() {
   return (
-    <div>
+    <Layout>
       <CallCenterReport />
-    </div>
+    </Layout>
   );
 }
 
