@@ -1,7 +1,5 @@
-import React, { ReactNode } from 'react';
-
 type LayoutProps = {
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
 const Layout = ({ children }: LayoutProps) => {
@@ -10,7 +8,7 @@ const Layout = ({ children }: LayoutProps) => {
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-10">
         <div className="relative bg-white rounded-lg shadow-lg p-6 md:p-10">
 
-          {/* PDF Download Button */}
+          {/* PDF Button */}
           <div className="absolute top-4 right-4 print:hidden">
             <button
               onClick={() => window.print()}
