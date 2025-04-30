@@ -70,7 +70,7 @@ export default function CallCenterReport() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 flex justify-center">
-      <div className="relative w-full max-w-screen-lg bg-white shadow-lg rounded-lg px-6 md:px-12 py-10">
+      <div className="relative w-full max-w-screen-lg bg-gray-700 shadow-lg rounded-lg px-6 md:px-12 py-10">
 
         {/* ✅ PDF Download Button - top-right INSIDE card */}
         <div className="absolute top-4 right-4 print:hidden">
@@ -90,18 +90,18 @@ export default function CallCenterReport() {
           Comprehensive review of call center metrics, staffing needs, missed call rates, IVR-related issues, and performance summaries across all weeks.
         </p>
 
-        <section className="bg-white p-6 rounded mb-8 shadow-sm">
+        <section className="bg-gray-700 p-6 rounded mb-8 shadow-sm">
           <h2 className="text-xl font-semibold mb-3">Executive Summary</h2>
-          <p className="mb-3 text-gray-700">
+          <p className="mb-3 text-gray-300">
             During the analysis period, over {total.inbound} inbound calls were received. Approximately {total.answered} were successfully answered, while {total.abandoned} calls were abandoned and {total.missed} were missed. Average handle time held steady at {avgHandleTime} minutes.
           </p>
-          <p className="text-gray-700">
+          <p className="text-gray-300">
             To manage the current call load efficiently, agents would need to collectively handle {totalMinutesNeeded.toFixed(0)} minutes of talk time. Based on weekday call averages and agent availability, we recommend a minimum of <span className="text-red-600 font-bold">{requiredAgents} full-time dedicated operators</span>.
           </p>
         </section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-          <div className="bg-white p-6 rounded shadow-sm">
+          <div className="bg-gray-700 p-6 rounded shadow-sm">
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-lg font-semibold">Call Volume Breakdown</h3>
               <div>
@@ -126,12 +126,12 @@ export default function CallCenterReport() {
                 <Bar dataKey="value" fill="#8884d8" />
               </BarChart>
             </ResponsiveContainer>
-            <p className="mt-4 text-gray-700 text-sm">
+            <p className="mt-4 text-gray-300 text-sm">
               This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded shadow-sm">
+          <div className="bg-gray-700 p-6 rounded shadow-sm">
             <h3 className="text-lg font-semibold mb-3 text-center">Call Disposition Summary</h3>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -152,13 +152,13 @@ export default function CallCenterReport() {
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
-            <p className="mt-4 text-gray-700 text-sm">
+            <p className="mt-4 text-gray-300 text-sm">
               This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
             </p>
           </div>
         </div>
 
-        <section className="bg-white p-6 rounded shadow-sm mb-10">
+        <section className="bg-gray-700 p-6 rounded shadow-sm mb-10">
           <h2 className="text-xl font-semibold mb-4">Weekly Trends (Line Chart)</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={allWeeks.map(week => ({
@@ -178,7 +178,7 @@ export default function CallCenterReport() {
           </ResponsiveContainer>
         </section>
 
-        <section className="bg-white p-6 rounded shadow-sm mb-10">
+        <section className="bg-gray-700 p-6 rounded shadow-sm mb-10">
           <h2 className="text-xl font-semibold mb-4">Detailed Weekly Performance</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full table-auto border text-sm text-left divide-y divide-gray-300">
@@ -208,9 +208,9 @@ export default function CallCenterReport() {
           </div>
         </section>
 
-        <section className="bg-white p-6 rounded shadow-sm mb-10">
+        <section className="bg-gray-700 p-6 rounded shadow-sm mb-10">
           <h2 className="text-xl font-semibold mb-4">Strategic Action Plan</h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <ul className="list-disc list-inside text-gray-300 space-y-1">
             <li>Enable hourly call tracking on the phone system.</li>
             <li>Deploy smart scheduling software based on hourly call trends.</li>
             <li>Establish agent performance KPIs (answer rate, average speed of answer).</li>
@@ -219,7 +219,7 @@ export default function CallCenterReport() {
           </ul>
         </section>
 
-        <section className="bg-white p-6 rounded shadow-sm">
+        <section className="bg-gray-700 p-6 rounded shadow-sm">
           <h2 className="text-xl font-semibold mb-4">Summary of Key Insights</h2>
           <p className="text-gray-300 text-sm">
             This report provides an overview of performance gaps in your call center process. Staffing and IVR performance are contributing to high abandonment. Use this data to prioritize staffing, scheduling, and system changes, and set a 30-60-90 day performance improvement plan for measurable impact.
