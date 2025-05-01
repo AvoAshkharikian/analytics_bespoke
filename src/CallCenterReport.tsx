@@ -14,7 +14,8 @@ import {
   LineChart,
   Line
 } from 'recharts';
-
+import { useState } from "react";
+import * as XLSX from "xlsx";
 type WeekData = {
   inbound: number;
   answered: number;
@@ -33,6 +34,24 @@ const data: Record<string, WeekData> = {
 const colors = ['#4CAF50', '#F44336', '#FF9800'];
 
 export default function CallCenterReport() {
+  const [excelData, setExcelData] = useState<any[]>([]);
+
+function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const data = new Uint8Array(e.target?.result as ArrayBuffer);
+    const workbook = XLSX.read(data, { type: "array" });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const parsedData = XLSX.utils.sheet_to_json(sheet);
+    setExcelData(parsedData);
+    console.log("📦 Upload Excel contents:", parsedData);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
   const [selectedWeek, setSelectedWeek] = React.useState<string | 'All'>('All');
 
   const allWeeks = Object.keys(data);
