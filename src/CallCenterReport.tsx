@@ -101,8 +101,7 @@ export default function CallCenterReport() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
           <div className="bg-gray-700 p-6 rounded shadow">
             <div className="flex justify-between items-center mb-3">
-              <h3 className="text-lg font-semibold text-white">Call Volume Breakdown</h3>
-              <div>
+              <h3 className="text-lg font-semibold text-white mb-3">Call Volume Breakdown</h3>
   </label>
 <div className="flex items-center gap-2">
   <label htmlFor="week-select" className="text-sm text-gray-300">
