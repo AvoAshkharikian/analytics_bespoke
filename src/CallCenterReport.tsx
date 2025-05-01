@@ -122,57 +122,48 @@ export default function CallCenterReport() {
 </select>
 </div>
 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-  {/* Bar Chart Section */}
+  {/* Bar Chart */}
   <div className="bg-gray-700 p-6 rounded shadow">
     <h3 className="text-lg font-semibold mb-4 text-white">Call Volume Breakdown</h3>
     <ResponsiveContainer width="100%" height={300}>
-      <BarChart
-        data={barData}
-        barSize={40}
-        margin={{ top: 20, right: 30, left: 0, bottom: 50 }}
-      >
-        <XAxis
-          dataKey="name"
-          stroke="#fff"
-          angle={-35}
-          textAnchor="end"
-          interval={0}
-        />
+      <BarChart data={barData}>
+        <XAxis dataKey="name" stroke="#fff" />
         <YAxis stroke="#fff" />
         <Tooltip />
         <Bar dataKey="value" fill="#a78bfa" />
       </BarChart>
     </ResponsiveContainer>
-    <p className="mt-4 text-gray-300 text-sm">
+    <p className="mt-4 text-sm text-gray-300">
       This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
     </p>
   </div>
-{/* 🥧 Pie Chart Section */}
-<div className="bg-gray-700 p-6 rounded shadow mb-10">
-  <h3 className="text-lg font-semibold mb-4 text-white text-center">Call Disposition Summary</h3>
-  <ResponsiveContainer width="100%" height={300}>
-    <PieChart>
-      <Pie
-        data={pieData}
-        dataKey="value"
-        nameKey="name"
-        cx="50%"
-        cy="50%"
-        outerRadius={100}
-        fill="#8884d8"
-        label
-      >
-        {pieData.map((_, index) => (
-          <Cell key={`cell-${index}`} fill={colors[index]} />
-        ))}
-      </Pie>
-      <Tooltip />
-      <Legend wrapperStyle={{ color: '#fff' }} />
-    </PieChart>
-  </ResponsiveContainer>
-  <p className="mt-4 text-gray-300 text-sm text-center">
-    This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
-  </p>
+  {/* Pie Chart */}
+  <div className="bg-gray-700 p-6 rounded shadow">
+    <h3 className="text-lg font-semibold mb-4 text-white text-center">Call Disposition Summary</h3>
+    <ResponsiveContainer width="100%" height={300}>
+      <PieChart>
+        <Pie
+          data={pieData}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          outerRadius={100}
+          fill="#8884d8"
+          label
+        >
+          {pieData.map((_, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index]} />
+          ))}
+        </Pie>
+        <Tooltip />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+      </PieChart>
+    </ResponsiveContainer>
+    <p className="mt-4 text-sm text-gray-300 text-center">
+      This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
+    </p>
+  </div>
 </div>
         <section className="bg-gray-700 p-6 rounded shadow mb-10">
           <h2 className="text-xl font-semibold mb-4 text-white">Weekly Trends (Line Chart)</h2>
