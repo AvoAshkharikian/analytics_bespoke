@@ -147,42 +147,31 @@ export default function CallCenterReport() {
       This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
     </p>
   </div>
-
   {/* Pie Chart Section */}
-  <div className="bg-gray-700 p-6 rounded shadow">
-    <h3 className="text-lg font-semibold mb-4 text-white text-center">Call Disposition Summary</h3>
-    <ResponsiveContainer width="100%" height={300}>
-      <PieChart>
-        <Pie
-          data={pieData}
-          dataKey="value"
-          nameKey="name"
-          cx="50%"
-          cy="50%"
-          outerRadius={100}
-          fill="#8884d8"
-          label
-        >
-          {pieData.map((_, index) => (
-            <Cell key={`cell-${index}`} fill={colors[index]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend wrapperStyle={{ color: '#fff' }} />
-      </PieChart>
-    </ResponsiveContainer>
-    <p className="mt-4 text-gray-300 text-sm text-center">
-      This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
-    </p>
-  </div>
-</div>
-                  ))}
-                </Pie>
-                <Legend wrapperStyle={{ color: '#fff' }} />
-              </PieChart>
-            </ResponsiveContainer>
-            <p className="mt-4 text-gray-300 text-sm">
-              This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
+<div className="bg-gray-700 p-6 rounded shadow">
+  <h3 className="text-lg font-semibold mb-4 text-white text-center">Call Disposition Summary</h3>
+  <ResponsiveContainer width="100%" height={300}>
+    <PieChart>
+      <Pie
+        data={pieData}
+        dataKey="value"
+        nameKey="name"
+        cx="50%"
+        cy="50%"
+        outerRadius={100}
+        fill="#8884d8"
+        label
+      >
+        {pieData.map((_, index) => (
+          <Cell key={`cell-${index}`} fill={colors[index]} />
+        ))}
+      </Pie>
+      <Tooltip />
+      <Legend wrapperStyle={{ color: '#fff' }} />
+    </PieChart>
+  </ResponsiveContainer>
+ <p className="mt-4 text-gray-300 text-sm text-center">
+  This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
             </p>
           </div>
         </div>
