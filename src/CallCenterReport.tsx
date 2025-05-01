@@ -100,38 +100,39 @@ export default function CallCenterReport() {
         </section>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
           <div className="bg-gray-700 p-6 rounded shadow">
-            <div className="flex justify-between items-center mb-3">
-              <h3 className="text-lg font-semibold text-white mb-3">Call Volume Breakdown</h3>
-  </label>
-<div className="flex items-center gap-2">
-  <label htmlFor="week-select" className="text-sm text-gray-300">
-    Select Week:
-  </label>
-  <select
-    id="week-select"
-    value={selectedWeek}
-    onChange={(e) => setSelectedWeek(e.target.value)}
-    className="bg-gray-600 text-white px-3 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400"
-  >
-    <option value="All">All Weeks</option>
-    {allWeeks.map((week) => (
-      <option key={week} value={week}>
-        {week}
-      </option>
-    ))}
-  </select>
-</div>
-                <XAxis dataKey="name" stroke="#fff" />
-                <YAxis stroke="#fff" />
-                <Tooltip />
-                <Bar dataKey="value" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
-            <p className="mt-4 text-gray-300 text-sm">
-              This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
-            </p>
-          </div>
+                   <div className="flex justify-between items-center mb-3">
+          <h3 className="text-lg font-semibold text-white mb-3">Call Volume Breakdown</h3>
+        </div>
+        <div className="flex items-center gap-2">
+          <label htmlFor="week-select" className="text-sm text-gray-300">
+            Select Week:
+          </label>
+          <select
+            id="week-select"
+            value={selectedWeek}
+            onChange={(e) => setSelectedWeek(e.target.value)}
+            className="bg-gray-600 text-white px-3 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400"
+          >
+            <option value="All">All Weeks</option>
+            {allWeeks.map((week) => (
+              <option key={week} value={week}>
+                {week}
+              </option>
+            ))}
+          </select>
+        </div>
 
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={barData}>
+            <XAxis dataKey="name" stroke="#fff" />
+            <YAxis stroke="#fff" />
+            <Tooltip />
+            <Bar dataKey="value" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
+        <p className="mt-4 text-gray-300 text-sm">
+          This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
+        </p>
           <div className="bg-gray-700 p-6 rounded shadow">
             <h3 className="text-lg font-semibold mb-3 text-center text-white">Call Disposition Summary</h3>
             <ResponsiveContainer width="100%" height={300}>
