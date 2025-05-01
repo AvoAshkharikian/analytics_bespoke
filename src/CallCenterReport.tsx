@@ -170,11 +170,11 @@ export default function CallCenterReport() {
       <Legend wrapperStyle={{ color: '#fff' }} />
     </PieChart>
   </ResponsiveContainer>
- <p className="mt-4 text-gray-300 text-sm text-center">
+<p className="mt-4 text-gray-300 text-sm text-center">
   This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
-            </p>
-          </div>
-        </div>
+</p>
+</div> {/* CLOSE pie chart container */}
+</div> {/* CLOSE grid container for bar + pie */}
         <section className="bg-gray-700 p-6 rounded shadow mb-10">
           <h2 className="text-xl font-semibold mb-4 text-white">Weekly Trends (Line Chart)</h2>
           <ResponsiveContainer width="100%" height={300}>
