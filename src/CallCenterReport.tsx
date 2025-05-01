@@ -126,24 +126,24 @@ export default function CallCenterReport() {
   {/* Bar Chart Section */}
   <div className="bg-gray-700 p-6 rounded shadow">
     <h3 className="text-lg font-semibold mb-4 text-white">Call Volume Breakdown</h3>
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart
-        data={barData}
-        barSize={40}
-        margin={{ top: 20, right: 30, left: 0, bottom: 50 }}
-      >
-        <XAxis
-          dataKey="name"
-          stroke="#fff"
-          angle={-35}
-          textAnchor="end"
-          interval={0}
-        />
-        <YAxis stroke="#fff" />
-        <Tooltip />
-        <Bar dataKey="value" fill="#a78bfa" />
-      </BarChart>
-    </ResponsiveContainer>
+   <ResponsiveContainer width="100%" height={300}>
+  <BarChart
+    data={barData}
+    barSize={40}
+    margin={{ top: 20, right: 30, left: 0, bottom: 50 }}
+  >
+    <XAxis
+      dataKey="name"
+      stroke="#fff"
+      angle={-35}
+      textAnchor="end"
+      interval={0}
+    />
+    <YAxis stroke="#fff" />
+    <Tooltip />
+    <Bar dataKey="value" fill="#a78bfa" />
+  </BarChart>
+</ResponsiveContainer>
     <p className="mt-4 text-gray-300 text-sm">
       This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
     </p>
