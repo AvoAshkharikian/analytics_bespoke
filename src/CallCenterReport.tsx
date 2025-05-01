@@ -108,21 +108,19 @@ export default function CallCenterReport() {
     Select Week:
   </label>
   <select
-    id="week-select"
-    value={selectedWeek}
-    onChange={(e) => setSelectedWeek(e.target.value)}
-    className="bg-gray-600 text-white px-3 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400"
-  >
-    <option value="All">All Weeks</option>
-    {allWeeks.map((week) => (
-      <option key={week} value={week}>
-        {week}
-      </option>
-    ))}
-  </select>
-</div>
-            </div>
-            <ResponsiveContainer width="100%" height={300}>
+   <select
+  id="week-select"
+  value={selectedWeek}
+  onChange={(e) => setSelectedWeek(e.target.value)}
+  className="bg-gray-600 text-white px-3 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400"
+>
+  <option value="All">All Weeks</option>
+  {allWeeks.map((week) => (
+    <option key={week} value={week}>
+      {week}
+    </option>
+  ))}
+</select>
               <BarChart data={barData}>
                 <XAxis dataKey="name" stroke="#fff" />
                 <YAxis stroke="#fff" />
