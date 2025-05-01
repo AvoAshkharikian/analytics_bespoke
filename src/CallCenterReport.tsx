@@ -103,7 +103,6 @@ export default function CallCenterReport() {
   <div className="flex justify-between items-center mb-3">
     <h3 className="text-lg font-semibold text-white mb-3">Call Volume Breakdown</h3>
   </div>
-
   <div className="flex items-center gap-2 mb-4">
     <label htmlFor="week-select" className="text-sm text-gray-300">
       Select Week:
@@ -148,7 +147,6 @@ export default function CallCenterReport() {
       This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
     </p>
   </div>
-  {/* Pie Chart Section */}
   <div className="bg-gray-700 p-6 rounded shadow">
     <h3 className="text-lg font-semibold mb-4 text-white text-center">Call Disposition Summary</h3>
     <ResponsiveContainer width="100%" height={300}>
