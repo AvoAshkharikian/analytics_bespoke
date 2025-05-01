@@ -182,7 +182,58 @@ export default function CallCenterReport() {
             </LineChart>
           </ResponsiveContainer>
         </section>
+{/* Performance Table Section */}
+<section className="bg-gray-700 p-6 rounded shadow mb-10">
+  <h2 className="text-lg font-semibold mb-4 text-white">Detailed Weekly Performance</h2>
+  <div className="overflow-x-auto">
+    <table className="min-w-full table-auto text-sm text-left text-gray-300">
+      <thead className="bg-gray-600 text-white">
+        <tr>
+          <th className="px-4 py-2">Week</th>
+          <th className="px-4 py-2">Inbound</th>
+          <th className="px-4 py-2">Answered</th>
+          <th className="px-4 py-2">Abandoned</th>
+          <th className="px-4 py-2">Missed</th>
+          <th className="px-4 py-2">Avg Handle Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {allWeeks.map((week) => (
+          <tr key={week} className="border-b border-gray-600">
+            <td className="px-4 py-2">{week}</td>
+            <td className="px-4 py-2">{data[week].inbound}</td>
+            <td className="px-4 py-2">{data[week].answered}</td>
+            <td className="px-4 py-2">{data[week].abandoned}</td>
+            <td className="px-4 py-2">{data[week].missed}</td>
+            <td className="px-4 py-2">{data[week].avgHandleTime.toFixed(2)} min</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+{/* Strategic Action Plan */}
+<section className="bg-gray-700 p-6 rounded shadow mb-10">
+  <h2 className="text-lg font-semibold mb-4 text-white">Strategic Action Plan</h2>
+  <ul className="list-disc list-inside space-y-2 text-gray-300">
+    <li>Enable hourly call tracking on the phone system.</li>
+    <li>Deploy smart scheduling software based on hourly call trends.</li>
+    <li>Establish agent performance KPIs (answer rate, average speed of answer).</li>
+    <li>Conduct IVR usability testing with real patients.</li>
+    <li>Schedule weekly reviews of abandonment and wait time trends.</li>
+  </ul>
+</section>
 
+{/* Summary of Key Insights */}
+<section className="bg-gray-700 p-6 rounded shadow">
+  <h2 className="text-lg font-semibold mb-4 text-white">Summary of Key Insights</h2>
+  <p className="text-sm text-gray-300">
+    This report provides an overview of performance gaps in your call center process.
+    Staffing and IVR performance are contributing to high abandonment. Use this data
+    to prioritize staffing, scheduling, and system changes, and set a 30-60-90 day
+    performance improvement plan for measurable impact.
+  </p>
+</section>
         {/* Additional table + summary sections can go here if needed */}
       </div>
     </div>
