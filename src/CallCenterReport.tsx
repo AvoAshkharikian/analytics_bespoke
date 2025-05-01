@@ -174,7 +174,6 @@ export default function CallCenterReport() {
     This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
   </p>
 </div>
-</div> {/* CLOSE grid container for bar + pie */}
         <section className="bg-gray-700 p-6 rounded shadow mb-10">
           <h2 className="text-xl font-semibold mb-4 text-white">Weekly Trends (Line Chart)</h2>
           <ResponsiveContainer width="100%" height={300}>
