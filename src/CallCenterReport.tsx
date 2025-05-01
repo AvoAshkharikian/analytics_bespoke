@@ -103,7 +103,7 @@ export default function CallCenterReport() {
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-lg font-semibold text-white">Call Volume Breakdown</h3>
               <div>
-     <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2">
   <label htmlFor="week-select" className="text-sm text-gray-300">
     Select Week:
   </label>
@@ -115,6 +115,10 @@ export default function CallCenterReport() {
   >
     <option value="All">All Weeks</option>
     {allWeeks.map((week) => (
+      <option key={week} value={week}>{week}</option>
+    ))}
+  </select>
+</div>
       <option key={week} value={week}>{week}</option>
     ))}
   </select>
