@@ -122,35 +122,55 @@ export default function CallCenterReport() {
       ))}
     </select>
   </div>
-  <ResponsiveContainer width="100%" height={300}>
-    <BarChart data={barData}>
-      <XAxis dataKey="name" stroke="#fff" />
-      <YAxis stroke="#fff" />
-      <Tooltip />
-      <Bar dataKey="value" fill="#8884d8" />
-    </BarChart>
-  </ResponsiveContainer>
-  <p className="mt-4 text-gray-300 text-sm">
-    This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
-  </p>
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+  {/* Bar Chart Section */}
+  <div className="bg-gray-700 p-6 rounded shadow">
+    <h3 className="text-lg font-semibold mb-4 text-white">Call Volume Breakdown</h3>
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart
+        data={barData}
+        barSize={40}
+        margin={{ top: 20, right: 30, left: 0, bottom: 50 }}
+      >
+        <XAxis
+          dataKey="name"
+          stroke="#fff"
+          angle={-35}
+          textAnchor="end"
+          interval={0}
+        />
+        <YAxis stroke="#fff" />
+        <Tooltip />
+        <Bar dataKey="value" fill="#a78bfa" />
+      </BarChart>
+    </ResponsiveContainer>
+    <p className="mt-4 text-gray-300 text-sm">
+      This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
+    </p>
+  </div>
+  {/* Pie Chart Section */}
+  <div className="bg-gray-700 p-6 rounded shadow">
+    <h3 className="text-lg font-semibold mb-4 text-white text-center">Call Disposition Summary</h3>
+    <ResponsiveContainer width="100%" height={300}>
+      <PieChart>
+        <Pie
+          data={pieData}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          outerRadius={100}
+          fill="#8884d8"
+          label
+        />
+        <Tooltip />
+      </PieChart>
+    </ResponsiveContainer>
+    <p className="mt-4 text-gray-300 text-sm text-center">
+      This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
+    </p>
+  </div>
 </div>
-        <p className="mt-4 text-gray-300 text-sm">
-          This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
-        </p>
-          <div className="bg-gray-700 p-6 rounded shadow">
-            <h3 className="text-lg font-semibold mb-3 text-center text-white">Call Disposition Summary</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={pieData}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  fill="#8884d8"
-                  label
-                >
                   {pieData.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={colors[index]} />
                   ))}
