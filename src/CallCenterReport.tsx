@@ -103,18 +103,22 @@ export default function CallCenterReport() {
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-lg font-semibold text-white">Call Volume Breakdown</h3>
               <div>
-                <button
-                  onClick={() => setSelectedWeek('All')}
-                  className={`mx-1 px-3 py-1 rounded ${selectedWeek === 'All' ? 'bg-blue-600 text-white' : 'bg-gray-400 text-black'}`}
-                >All</button>
-                {allWeeks.map(week => (
-                  <button
-                    key={week}
-                    onClick={() => setSelectedWeek(week)}
-                    className={`mx-1 px-3 py-1 rounded ${selectedWeek === week ? 'bg-blue-600 text-white' : 'bg-gray-400 text-black'}`}
-                  >{week}</button>
-                ))}
-              </div>
+     <div className="flex items-center gap-2">
+  <label htmlFor="week-select" className="text-sm text-gray-300">
+    Select Week:
+  </label>
+  <select
+    id="week-select"
+    value={selectedWeek}
+    onChange={(e) => setSelectedWeek(e.target.value)}
+    className="bg-gray-600 text-white px-3 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400"
+  >
+    <option value="All">All Weeks</option>
+    {allWeeks.map((week) => (
+      <option key={week} value={week}>{week}</option>
+    ))}
+  </select>
+</div>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={barData}>
