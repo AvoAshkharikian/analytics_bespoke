@@ -1,3 +1,4 @@
+// CallCenterReport.tsx
 import * as React from 'react';
 import {
   BarChart,
@@ -9,9 +10,10 @@ import {
   Pie,
   Cell,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
+  LineChart,
+  Line
 } from 'recharts';
-import { LineChart, Line } from 'recharts';
 
 type WeekData = {
   inbound: number;
@@ -69,9 +71,8 @@ export default function CallCenterReport() {
   const requiredAgents = Math.ceil((callsPerDay * parseFloat(avgHandleTime)) / availableMinutesPerAgent);
 
   return (
-    <div className="min-h-screen bg-gray-900 py-12 px-4 flex justify-center text-white">
-      <div className="relative w-full max-w-screen-lg bg-gray-800 shadow-lg rounded-lg px-6 md:px-12 py-10">
-        {/* ✅ PDF Download Button - top-right INSIDE card */}
+    <div className="min-h-screen bg-gray-900 py-12 px-4 flex justify-center">
+      <div className="relative w-full max-w-screen-lg bg-gray-800 text-white shadow-md rounded-lg px-6 md:px-12 py-10">
         <div className="absolute top-4 right-4 print:hidden">
           <button
             onClick={() => window.print()}
@@ -90,7 +91,7 @@ export default function CallCenterReport() {
         </p>
 
         <section className="bg-gray-700 p-6 rounded mb-8 shadow">
-          <h2 className="text-xl font-semibold mb-3 text-white">Executive Summary</h2>
+          <h2 className="text-xl font-semibold mb-3">Executive Summary</h2>
           <p className="mb-3 text-gray-300">
             During the analysis period, over {total.inbound} inbound calls were received. Approximately {total.answered} were successfully answered, while {total.abandoned} calls were abandoned and {total.missed} were missed. Average handle time held steady at {avgHandleTime} minutes.
           </p>
@@ -98,75 +99,72 @@ export default function CallCenterReport() {
             To manage the current call load efficiently, agents would need to collectively handle {totalMinutesNeeded.toFixed(0)} minutes of talk time. Based on weekday call averages and agent availability, we recommend a minimum of <span className="text-red-400 font-bold">{requiredAgents} full-time dedicated operators</span>.
           </p>
         </section>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-         <div className="bg-gray-700 p-6 rounded shadow-md shadow-black/40">
-  <div className="flex justify-between items-center mb-3">
-    <h3 className="text-lg font-semibold text-white mb-3">Call Volume Breakdown</h3>
-  </div>
-  <div className="flex items-center gap-2 mb-4">
-    <label htmlFor="week-select" className="text-sm text-gray-300">
-      Select Week:
-    </label>
-    <select
-      id="week-select"
-      value={selectedWeek}
-      onChange={(e) => setSelectedWeek(e.target.value)}
-      className="bg-gray-600 text-white px-3 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400"
-    >
-      <option value="All">All Weeks</option>
-      {allWeeks.map((week) => (
-        <option key={week} value={week}>
-          {week}
-        </option>
-      ))}
-</select>
-</div>
-<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-  {/* Bar Chart */}
-  <div className="bg-gray-700 p-6 rounded shadow">
-    <h3 className="text-lg font-semibold mb-4 text-white">Call Volume Breakdown</h3>
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={barData}>
-        <XAxis dataKey="name" stroke="#fff" />
-        <YAxis stroke="#fff" />
-        <Tooltip />
-        <Bar dataKey="value" fill="#a78bfa" />
-      </BarChart>
-    </ResponsiveContainer>
-    <p className="mt-4 text-sm text-gray-300">
-      This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
-    </p>
-  </div>
-  {/* Pie Chart */}
-  <div className="bg-gray-700 p-6 rounded shadow">
-    <h3 className="text-lg font-semibold mb-4 text-white text-center">Call Disposition Summary</h3>
-    <ResponsiveContainer width="100%" height={300}>
-      <PieChart>
-        <Pie
-          data={pieData}
-          dataKey="value"
-          nameKey="name"
-          cx="50%"
-          cy="50%"
-          outerRadius={100}
-          fill="#8884d8"
-          label
-        >
-          {pieData.map((_, index) => (
-            <Cell key={`cell-${index}`} fill={colors[index]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend wrapperStyle={{ color: '#fff' }} />
-      </PieChart>
-    </ResponsiveContainer>
-    <p className="mt-4 text-sm text-gray-300 text-center">
-      This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
-    </p>
-  </div>
-</div>
+          {/* Bar Chart Section */}
+          <div className="bg-gray-700 p-6 rounded shadow">
+            <h3 className="text-lg font-semibold mb-4 text-white">Call Volume Breakdown</h3>
+            <div className="flex items-center gap-2 mb-4">
+              <label htmlFor="week-select" className="text-sm text-gray-300">Select Week:</label>
+              <select
+                id="week-select"
+                value={selectedWeek}
+                onChange={(e) => setSelectedWeek(e.target.value)}
+                className="bg-gray-600 text-white px-3 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400"
+              >
+                <option value="All">All Weeks</option>
+                {allWeeks.map((week) => (
+                  <option key={week} value={week}>{week}</option>
+                ))}
+              </select>
+            </div>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={barData} barSize={40}>
+                <XAxis dataKey="name" stroke="#fff" angle={-35} textAnchor="end" interval={0} />
+                <YAxis stroke="#fff" />
+                <Tooltip />
+                <Bar dataKey="value" fill="#a78bfa" />
+              </BarChart>
+            </ResponsiveContainer>
+            <p className="mt-4 text-sm text-gray-300">
+              This bar chart illustrates the volume of inbound, answered, abandoned, and missed calls.
+            </p>
+          </div>
+
+          {/* Pie Chart Section */}
+          <div className="bg-gray-700 p-6 rounded shadow">
+            <h3 className="text-lg font-semibold mb-4 text-white text-center">Call Disposition Summary</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={pieData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  fill="#8884d8"
+                  label
+                >
+                  {pieData.map((_, index) => (
+                    <Cell key={`cell-${index}`} fill={colors[index]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend wrapperStyle={{ color: '#fff' }} />
+              </PieChart>
+            </ResponsiveContainer>
+            <p className="mt-4 text-sm text-gray-300 text-center">
+              This pie chart visually summarizes the distribution of answered, abandoned, and missed calls.
+            </p>
+          </div>
+        </div>
+
         <section className="bg-gray-700 p-6 rounded shadow mb-10">
-          <h2 className="text-xl font-semibold mb-4 text-white">Weekly Trends (Line Chart)</h2>
+          <h2 className="text-xl font-semibold mb-4">Weekly Trends (Line Chart)</h2>
+          <p className="text-gray-300 text-sm mb-4">
+            This chart illustrates the trends in call volume and outcomes across each week, helping identify whether improvements are being made over time.
+          </p>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={allWeeks.map(week => ({
               week,
@@ -177,7 +175,7 @@ export default function CallCenterReport() {
               <XAxis dataKey="week" stroke="#fff" />
               <YAxis stroke="#fff" />
               <Tooltip />
-              <Legend wrapperStyle={{ color: '#fff' }} />
+              <Legend />
               <Line type="monotone" dataKey="answered" stroke="#4CAF50" name="Answered Calls" />
               <Line type="monotone" dataKey="abandoned" stroke="#F44336" name="Abandoned Calls" />
               <Line type="monotone" dataKey="missed" stroke="#FF9800" name="Missed Calls" />
@@ -185,53 +183,7 @@ export default function CallCenterReport() {
           </ResponsiveContainer>
         </section>
 
-        <section className="bg-gray-700 p-6 rounded shadow mb-10">
-          <h2 className="text-xl font-semibold mb-4 text-white">Detailed Weekly Performance</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full table-auto border text-sm text-left divide-y divide-gray-600 text-gray-300">
-              <thead>
-                <tr className="bg-gray-800 text-white">
-                  <th className="px-6 py-3 whitespace-nowrap">Week</th>
-                  <th className="px-4 py-2">Inbound</th>
-                  <th className="px-4 py-2">Answered</th>
-                  <th className="px-4 py-2">Abandoned</th>
-                  <th className="px-4 py-2">Missed</th>
-                  <th className="px-4 py-2">Avg Handle Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.entries(data).map(([week, values]) => (
-                  <tr key={week} className="border-b border-gray-600">
-                    <td className="px-4 py-2 font-medium">{week}</td>
-                    <td className="px-4 py-2">{values.inbound}</td>
-                    <td className="px-4 py-2">{values.answered}</td>
-                    <td className="px-4 py-2">{values.abandoned}</td>
-                    <td className="px-4 py-2">{values.missed}</td>
-                    <td className="px-4 py-2">{values.avgHandleTime.toFixed(2)} min</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-        <section className="bg-gray-700 p-6 rounded shadow mb-10">
-          <h2 className="text-xl font-semibold mb-4 text-white">Strategic Action Plan</h2>
-          <ul className="list-disc list-inside text-gray-300 space-y-1">
-            <li>Enable hourly call tracking on the phone system.</li>
-            <li>Deploy smart scheduling software based on hourly call trends.</li>
-            <li>Establish agent performance KPIs (answer rate, average speed of answer).</li>
-            <li>Conduct IVR usability testing with real patients.</li>
-            <li>Schedule weekly reviews of abandonment and wait time trends.</li>
-          </ul>
-        </section>
-
-        <section className="bg-gray-700 p-6 rounded shadow">
-          <h2 className="text-xl font-semibold mb-4 text-white">Summary of Key Insights</h2>
-          <p className="text-gray-300 text-sm">
-            This report provides an overview of performance gaps in your call center process. Staffing and IVR performance are contributing to high abandonment. Use this data to prioritize staffing, scheduling, and system changes, and set a 30-60-90 day performance improvement plan for measurable impact.
-          </p>
-        </section>
-
+        {/* Additional table + summary sections can go here if needed */}
       </div>
     </div>
   );
