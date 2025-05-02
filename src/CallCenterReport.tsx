@@ -244,3 +244,7 @@ export default function CallCenterReport() {
     performance improvement plan for measurable impact.
   </p>
 </section>
+      </div> {/* End inner container */}
+    </div>   {/* End screen wrapper */}
+  );
+}
